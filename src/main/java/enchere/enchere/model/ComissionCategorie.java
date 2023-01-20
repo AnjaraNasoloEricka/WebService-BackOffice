@@ -1,6 +1,6 @@
-package mapping;
+package enchere.enchere.model;
 
-import connexion.Connexion;
+import enchere.enchere.connexion.Connexion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 public class ComissionCategorie {
     int id;
-    int idCategorie ;
-    float pourcentage ;
+    int idCategorie;
+    float pourcentage;
 
     public int getId() {
         return id;
@@ -35,20 +35,20 @@ public class ComissionCategorie {
         this.pourcentage = pourcentage;
     }
 
-    public static void modifComissionCategorie(int idCategorie,ComissionCategorie v) throws Exception{
-        Connexion c=new Connexion();
+    public static void modifComissionCategorie(int idCategorie, ComissionCategorie v) throws Exception {
+        Connexion c = new Connexion();
         PreparedStatement stat = null;
         Connection co = null;
 
-        try{
+        try {
             co = c.getConnection();
-            String requete = "update Comission_Categorie set pourcentage=? where idCategorie="+idCategorie+";";
+            String requete = "update Comission_Categorie set pourcentage=? where idCategorie=" + idCategorie + ";";
             stat = co.prepareStatement(requete);
-            stat.setFloat(1,v.getPourcentage());
+            stat.setFloat(1, v.getPourcentage());
             stat.executeUpdate();
-        }catch(SQLException e){}
-        finally{
-            if(stat != null){
+        } catch (SQLException e) {
+        } finally {
+            if (stat != null) {
                 stat.close();
             }
             co.close();
